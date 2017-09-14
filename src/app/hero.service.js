@@ -6,17 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var core_1 = require("@angular/core");
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = "Tour of Heros";
+var mock_heros_1 = require("./mock-heros");
+var HeroService = (function () {
+    function HeroService() {
     }
-    return AppComponent;
+    HeroService.prototype.getHeros = function () {
+        return Promise.resolve(mock_heros_1.HEROS);
+    };
+    HeroService.prototype.getHerosSlowly = function () {
+        var _this = this;
+        return new Promise(function (resolve) { setTimeout(function () { return resolve(_this.getHeros()); }, 7000); });
+    };
+    return HeroService;
 }());
-AppComponent = __decorate([
-    core_1.Component({
-        selector: 'my-app',
-        template: "\n        <h1>{{title}}</h1>        \n        <my-heros></my-heros>\n        "
-    })
-], AppComponent);
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+HeroService = __decorate([
+    core_1.Injectable()
+], HeroService);
+exports.HeroService = HeroService;
+//# sourceMappingURL=hero.service.js.map
